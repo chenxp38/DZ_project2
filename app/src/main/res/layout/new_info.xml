@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp">
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/nameNew"
+                android:text="姓名"
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp"
+                android:gravity="center"/>
+            <EditText
+                android:id="@+id/nameET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:hint="请输入要添加的姓名"
+                android:stretchColumns="1" />
+        </TableRow>
+        <TableRow
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/birthNew"
+                android:text="生日"
+                android:gravity="end"
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/birthET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:hint="请输入生日"
+                android:stretchColumns="1" />
+        </TableRow>
+        <TableRow
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/giftNew"
+                android:text="礼物"
+                android:gravity="end"
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/giftET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:hint="请输入礼物名称"
+                android:stretchColumns="1" />
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/BtnAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/shape"
+            android:text="增加"
+            android:textAllCaps="false"
+            android:textSize="16dp"
+            android:textColor="@color/colorWhite" />
+
+        <Button
+            android:id="@+id/BtnClear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/shape"
+            android:text="清空"
+            android:textAllCaps="false"
+            android:textSize="16dp"
+            android:textColor="@color/colorWhite" />
+
+        <Button
+            android:id="@+id/BtnC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape"
+            android:text="取消"
+            android:textAllCaps="false"
+            android:textSize="16dp"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
+
+</LinearLayout>
