@@ -30,7 +30,7 @@
         android:layout_marginLeft="5dp"
         />
 
-    <EditText
+    <TextView
         android:id="@+id/user_introduce"
         android:layout_width="0dp"
         android:hint="用户签名"

@@ -20,26 +20,14 @@
         android:id="@+id/login_name"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="用户名"
+        android:text="用&#8194;户&#8194;名:"
         android:gravity="fill"
-        android:textSize="24sp"
+        android:textSize="22sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/name_inout"
         app:layout_constraintTop_toBottomOf="@+id/image_head"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="15dp"/>
-    <TextView
-        android:id="@+id/signal_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=":"
-        android:textSize="24sp"
-        app:layout_constraintLeft_toRightOf="@id/login_name"
-        app:layout_constraintRight_toLeftOf="@+id/pwd_inout"
-        app:layout_constraintTop_toBottomOf="@+id/image_head"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="30dp" />
-
     <EditText
         android:id="@+id/name_input"
         android:layout_width="0dp"
@@ -49,25 +37,13 @@
         app:layout_constraintLeft_toRightOf="@+id/login_name"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_head" />
-
-    <TextView
-        android:id="@+id/signal_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=":"
-        android:textSize="24sp"
-        app:layout_constraintLeft_toRightOf="@id/login_password"
-        app:layout_constraintRight_toLeftOf="@+id/pwd_inout"
-        app:layout_constraintTop_toBottomOf="@+id/login_name"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="30dp" />
     <TextView
         android:id="@+id/login_password"
-        android:gravity="center"
+        android:gravity="fill"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="密  码"
-        android:textSize="24sp"
+        android:text="密&#12288;&#12288;码:"
+        android:textSize="22sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/pwd_inout"
         app:layout_constraintTop_toBottomOf="@+id/login_name"
@@ -89,11 +65,11 @@
 
     <TextView
         android:id="@+id/password_confirm"
-        android:gravity="center"
+        android:gravity="fill"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="确认密码"
-        android:textSize="24sp"
+        android:text="确认密码:"
+        android:textSize="22sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/pwd_confirm_input"
         app:layout_constraintTop_toBottomOf="@+id/login_password"
@@ -119,6 +95,17 @@
         android:layout_height="wrap_content"
         android:text="确认注册"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_confirm"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        />
+
+    <Button
+        android:id="@+id/login_in_manage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="管理员注册"
+        app:layout_constraintLeft_toRightOf="@id/login_in"
         app:layout_constraintTop_toBottomOf="@+id/password_confirm"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="30dp"
