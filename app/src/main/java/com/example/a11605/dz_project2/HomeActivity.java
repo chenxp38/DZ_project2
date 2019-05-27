@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
@@ -31,9 +32,17 @@ public class HomeActivity extends AppCompatActivity {
     }
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //在setContentView之前添加,未添加的话home键监听无效，设置窗体属性
+        this.getWindow().setFlags(0x80000000, 0x80000000);
         setContentView(R.layout.activity_home);
 
         findbyid();
 
-    }
+        head_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        }
 }

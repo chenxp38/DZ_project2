@@ -98,8 +98,8 @@ public class DataViewActivity extends AppCompatActivity {
                     AlertDialog.Builder builder = new AlertDialog.Builder(DataViewActivity.this);
 
                     usernameTV = (TextView) newView.findViewById(R.id.nameXG1);
-                    passwordET = (EditText) newView.findViewById(R.id.birthXG1);
-                    head_iamgeET = (EditText) newView.findViewById(R.id.giftXG1);
+                    passwordET = (EditText) newView.findViewById(R.id.passwordXG1);
+                    head_iamgeET = (EditText) newView.findViewById(R.id.head_imageXG1);
                     phone = (TextView) newView.findViewById(R.id.phone);
 
                     usernameTV.setText(datas.get(position).get("username"));
