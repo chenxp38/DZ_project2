@@ -20,18 +20,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/nameNew"
-                android:text="姓名"
+                android:id="@+id/usernameNew"
+                android:text="用户名："
                 android:textColor="@color/colorBlack"
                 android:textSize="15dp"
                 android:gravity="center"/>
             <EditText
-                android:id="@+id/nameET"
+                android:id="@+id/usernameET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:hint="请输入要添加的姓名"
+                android:hint="请输入要用户名"
                 android:stretchColumns="1" />
         </TableRow>
         <TableRow
@@ -39,19 +39,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/birthNew"
-                android:text="生日"
+                android:id="@+id/passwordNew"
+                android:text="密码："
                 android:gravity="end"
                 android:textColor="@color/colorBlack"
                 android:textSize="15dp" />
 
             <EditText
-                android:id="@+id/birthET"
+                android:id="@+id/passwordET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:hint="请输入生日"
+                android:hint="请输入密码"
                 android:stretchColumns="1" />
         </TableRow>
         <TableRow
@@ -59,19 +59,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/giftNew"
-                android:text="礼物"
+                android:id="@+id/head_image_urlNew"
+                android:text="头像："
                 android:gravity="end"
                 android:textColor="@color/colorBlack"
                 android:textSize="15dp" />
 
             <EditText
-                android:id="@+id/giftET"
+                android:id="@+id/head_image_urlET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:hint="请输入礼物名称"
+                android:hint="请输入头像："
                 android:stretchColumns="1" />
         </TableRow>
     </TableLayout>

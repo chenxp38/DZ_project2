@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/nameLV"
+        android:id="@+id/usernameLV"
         android:layout_weight="1"
         android:text=""
         android:textColor="@color/colorBlack"
@@ -19,7 +19,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/birthLV"
+        android:id="@+id/passwordLV"
         android:layout_weight="1"
         android:text=""
         android:textColor="@color/colorBlack"
@@ -29,7 +29,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/giftLV"
+        android:id="@+id/head_image_urlLV"
         android:layout_weight="2"
         android:text=""
         android:textColor="@color/colorBlack"

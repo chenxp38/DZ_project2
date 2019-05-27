@@ -17,17 +17,17 @@ public class AddActivity extends AppCompatActivity {
     public Button clear;
     public Button BtnC;
 
-    public EditText addET;
-    public EditText birthET;
-    public EditText giftET;
+    public EditText usernameET;
+    public EditText passwordET;
+    public EditText head_iamge_ET;
 
     private void findViewById() {
         addBtn = (Button) findViewById(R.id.BtnAdd);
         clear = (Button) findViewById(R.id.BtnClear);
         BtnC = (Button) findViewById(R.id.BtnC);
-        addET = (EditText) findViewById(R.id.nameET);
-        birthET = (EditText) findViewById(R.id.birthET);
-        giftET = (EditText) findViewById(R.id.giftET);
+        usernameET = (EditText) findViewById(R.id.usernameET);
+        passwordET = (EditText) findViewById(R.id.passwordET);
+        head_iamge_ET = (EditText) findViewById(R.id.head_image_urlET);
     }
 
     // 创建类
@@ -45,29 +45,29 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 findViewById();
-                if (addET.length() == 0) {
+                if (usernameET.length() == 0) {
                     // 当编辑框为空时，输出相应的Toast信息
                     Toast.makeText(AddActivity.this, "名字为空啦，请完善一下哦~", Toast.LENGTH_SHORT).show();
                 } else {
                     findViewById();
 
-                    String namet = addET.getText().toString();
-                    String birtht = birthET.getText().toString();
-                    String giftt = giftET.getText().toString();
+                    String usernamet = usernameET.getText().toString();
+                    String passwordt = passwordET.getText().toString();
+                    String head_image_t = head_iamge_ET.getText().toString();
 
                     MyDataBase db = new MyDataBase(getBaseContext());
                     SQLiteDatabase sqLiteDatabase = db.getWritableDatabase();
                     Cursor cursor = sqLiteDatabase.rawQuery("select * from " +
-                            TABLE_NAME + " where name like ?", new String[]{namet});
+                            TABLE_NAME + " where username like ?", new String[]{usernamet});
 
                     if (cursor.moveToFirst() == true) {
                         // 当姓名编辑框与数据库中已存在的数据相同时，输出相应的Toast信息
                         Toast.makeText(AddActivity.this, "名字重复啦，请核查一下哦~", Toast.LENGTH_SHORT).show();
                     } else {
                         ContentValues contentValues = new ContentValues();
-                        contentValues.put("name", namet);
-                        contentValues.put("birth", birtht);
-                        contentValues.put("gift", giftt);
+                        contentValues.put("username", usernamet);//存
+                        contentValues.put("password", passwordt);
+                        contentValues.put("image_heaad_url", head_image_t);
                         sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
                         sqLiteDatabase.close();
                         Intent intent = new Intent(AddActivity.this, DataViewActivity.class);
@@ -85,9 +85,9 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 findViewById();
-                addET.setText("");
-                birthET.setText("");
-                giftET.setText("");
+                usernameET.setText("");
+                passwordET.setText("");
+                head_iamge_ET.setText("");
             }
         });
 

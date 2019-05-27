@@ -36,9 +36,9 @@ public class DataViewActivity extends AppCompatActivity {
         public ListView LV;
         public SimpleAdapter adapter;
 
-        public TextView nameTV;
-        public EditText birthET;
-        public EditText giftET;
+        public TextView usernameTV;
+        public EditText passwordET;
+        public EditText head_iamgeET;
         public TextView phone;
         private static final String TABLE_NAME = "Info";//数据库表的名字
         public List<Map<String, String>> datas = new ArrayList<Map<String, String>>();
@@ -59,18 +59,18 @@ public class DataViewActivity extends AppCompatActivity {
                 if (cursor == null) {
                 } else {
                     while (cursor.moveToNext()) {
-                        String name1 = cursor.getString(0);
-                        String birth1 = cursor.getString(1);
-                        String gift1 = cursor.getString(2);
+                        String username1 = cursor.getString(0);
+                        String password1 = cursor.getString(1);
+                        String head_image1 = cursor.getString(2);
                         Map<String, String> map = new HashMap<String, String>();
-                        map.put("name", name1);
-                        map.put("birth", birth1);
-                        map.put("gift", gift1);
+                        map.put("username", username1);
+                        map.put("password", password1);
+                        map.put("image_heaad_url", head_image1);
                         datas .add(map);
                     }
                     adapter = new SimpleAdapter(DataViewActivity.this, datas, R.layout.item,
-                            new String[]{"name", "birth", "gift"},
-                            new int[]{R.id.nameLV, R.id.birthLV, R.id.giftLV});
+                            new String[]{"username", "password", "image_heaad_url"},
+                            new int[]{R.id.usernameLV, R.id.passwordLV, R.id.head_image_urlLV});//item
                     LV.setAdapter(adapter);
                 }
             } catch (SQLException e) {
@@ -84,7 +84,7 @@ public class DataViewActivity extends AppCompatActivity {
             setContentView(R.layout.activity_dataview);
             LV = (ListView) findViewById(R.id.Start);
 
-            //deleteDb();因为属性是一条一条加的，数据库要重新改变，测试用，否则不要删除表，删除了只能重新安装软件
+            //deleteDb();//因为属性是一条一条加的，数据库要重新改变，测试用，否则不要删除表，删除了只能重新安装软件
             // 在刚打开时将保存在数据库中的数据更新到UI中
             dataUpdate();
 
@@ -97,14 +97,14 @@ public class DataViewActivity extends AppCompatActivity {
                     View newView = factory.inflate(R.layout.dialoglayout, null);
                     AlertDialog.Builder builder = new AlertDialog.Builder(DataViewActivity.this);
 
-                    nameTV = (TextView) newView.findViewById(R.id.nameXG1);
-                    birthET = (EditText) newView.findViewById(R.id.birthXG1);
-                    giftET = (EditText) newView.findViewById(R.id.giftXG1);
+                    usernameTV = (TextView) newView.findViewById(R.id.nameXG1);
+                    passwordET = (EditText) newView.findViewById(R.id.birthXG1);
+                    head_iamgeET = (EditText) newView.findViewById(R.id.giftXG1);
                     phone = (TextView) newView.findViewById(R.id.phone);
 
-                    nameTV.setText(datas.get(position).get("name"));
-                    birthET.setText(datas.get(position).get("birth"));
-                    giftET.setText(datas.get(position).get("gift"));
+                    usernameTV.setText(datas.get(position).get("username"));
+                    passwordET.setText(datas.get(position).get("password"));
+                    head_iamgeET.setText(datas.get(position).get("image_heaad_url"));
 
                     // 通过询问同学，在读取通信录之前进行api23的动态权限申请
                     if (ContextCompat.checkSelfPermission(DataViewActivity.this, Manifest.permission.READ_CONTACTS)!= PackageManager.PERMISSION_GRANTED) {
@@ -119,7 +119,7 @@ public class DataViewActivity extends AppCompatActivity {
                     while (cursor1.moveToNext()) {
                         String str2 = cursor1.getString(cursor1.getColumnIndex("_id"));
                         if (cursor1.getString(cursor1.getColumnIndex("display_name"))
-                                .equals(nameTV.getText().toString())) {
+                                .equals(usernameTV.getText().toString())) {
                             // 判断某条联系人的信息中，是否有电话号码
                             if (Integer.parseInt(cursor1.getString(cursor1.getColumnIndex("has_phone_number"))) > 0) {
                                 // 取出该条联系人信息中的电话号码
@@ -148,20 +148,20 @@ public class DataViewActivity extends AppCompatActivity {
                     builder.setPositiveButton("保存修改", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            if (birthET.length() != 0) {
+                            if (passwordET.length() != 0) {
                                 MyDataBase db = new MyDataBase(getBaseContext());
                                 SQLiteDatabase sqLiteDatabase = db.getWritableDatabase();
                                 sqLiteDatabase.execSQL("update " + TABLE_NAME +
-                                        " set birth = ? where name = ?", new Object[]{
-                                        birthET.getText().toString(), nameTV.getText().toString()});
+                                        " set password = ? where username = ?", new Object[]{
+                                        passwordET.getText().toString(), usernameTV.getText().toString()});
                                 sqLiteDatabase.close();
                             }
-                            if (giftET.length() != 0) {
+                            if (head_iamgeET.length() != 0) {
                                 MyDataBase db = new MyDataBase(getBaseContext());
                                 SQLiteDatabase sqLiteDatabase = db.getWritableDatabase();
                                 sqLiteDatabase.execSQL("update " + TABLE_NAME +
-                                        " set gift = ? where name = ?", new Object[]{
-                                        giftET.getText().toString(), nameTV.getText().toString()});
+                                        " set image_heaad_url = ? where username = ?", new Object[]{
+                                        head_iamgeET.getText().toString(), usernameTV.getText().toString()});
                                 sqLiteDatabase.close();
                             }
                             dataUpdate();
@@ -214,7 +214,7 @@ public class DataViewActivity extends AppCompatActivity {
                             MyDataBase db = new MyDataBase(getBaseContext());
                             SQLiteDatabase sqLiteDatabase = db.getWritableDatabase();
                             sqLiteDatabase.execSQL("delete from " + TABLE_NAME
-                                    + " where name = ?", new String[]{datas.get(position).get("name")});
+                                    + " where username = ?", new String[]{datas.get(position).get("username")});
                             sqLiteDatabase.close();
                             // 删除listview中的对应数据
                             datas.remove(position);

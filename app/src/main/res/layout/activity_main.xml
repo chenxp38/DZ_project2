@@ -89,14 +89,34 @@
         />
 
     <Button
-        android:id="@+id/login_in"
+        android:id="@+id/login_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="马上注册"
+        android:text="登录"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_password"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="30dp"
         />
 
+    <Button
+        android:id="@+id/login_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="马上注册"
+        app:layout_constraintLeft_toRightOf="@+id/login_manage"
+        app:layout_constraintTop_toBottomOf="@+id/login_password"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        />
+    <Button
+        android:id="@+id/login_manage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="管理员登陆"
+        app:layout_constraintLeft_toRightOf="@+id/login_up"
+        app:layout_constraintTop_toBottomOf="@+id/login_password"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        />
 </android.support.constraint.ConstraintLayout>

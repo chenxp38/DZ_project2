@@ -12,8 +12,8 @@ public class MyDataBase extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "Info";
     private static final int DB_VERSION = 1;
 
-    public MyDataBase(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public MyDataBase(Context context, String username, SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, username, factory, version);
     }
 
     public MyDataBase(Context context) {
@@ -25,9 +25,9 @@ public class MyDataBase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String CREATE_TABLE = "CREATE TABLE if not exists "
                 + TABLE_NAME
-                + "(name TEXT PRIMARY KEY,"
-                + "birth TEXT,"
-                + "gift TEXT)";
+                + "(username TEXT PRIMARY KEY,"
+                + "password TEXT,"
+                + "image_heaad_url TEXT)";
         try {
             sqLiteDatabase.execSQL(CREATE_TABLE);
         } catch (SQLException e) {
