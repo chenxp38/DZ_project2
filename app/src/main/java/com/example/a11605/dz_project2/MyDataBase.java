@@ -1,9 +1,16 @@
 package com.example.a11605.dz_project2;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.CharArrayBuffer;
+import android.database.ContentObserver;
+import android.database.Cursor;
+import android.database.DataSetObserver;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+import android.os.Bundle;
 
 
 public class MyDataBase extends SQLiteOpenHelper {
@@ -41,5 +48,9 @@ public class MyDataBase extends SQLiteOpenHelper {
     }
 
 
+    public Cursor query(String tableName, Object o, Object o1, Object o2, Object o3, Object o4, Object o5) {
+//查询语句还需要重写
+        return  null;
+    }
 }
 

@@ -50,7 +50,6 @@ public class AddActivity extends AppCompatActivity {
                     Toast.makeText(AddActivity.this, "名字为空啦，请完善一下哦~", Toast.LENGTH_SHORT).show();
                 } else {
                     findViewById();
-
                     String usernamet = usernameET.getText().toString();
                     String passwordt = passwordET.getText().toString();
                     String head_image_t = head_iamge_ET.getText().toString();
