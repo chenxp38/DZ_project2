@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
                 String name = login_name.getText().toString();
                 String pwd = password.getText().toString();
                 if(name.equals("")){
-                    Toast.makeText(getApplicationContext(),"用户名为空！",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"用户名为空！",Toast.LENGTH_SHORT).show();
                 }else if(pwd.equals("")){
-                    Toast.makeText(getApplicationContext(),"密码为空！",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"密码为空！",Toast.LENGTH_SHORT).show();
                 }else if(!name.equals("") && !pwd.equals("")) {
                     MyDataBase db = new MyDataBase(getBaseContext());
                     SQLiteDatabase sqLiteDatabase = db.getWritableDatabase();
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(intent);
                             MainActivity.this.finish();
                         }else{
-                            Toast.makeText(getApplicationContext(),"密码错误！",Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this,"密码错误！",Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         // 当姓名编辑框与数据库中已存在的数据不相同时，输出相应的Toast信息
@@ -80,16 +80,20 @@ public class MainActivity extends AppCompatActivity {
                 String name = login_name.getText().toString();
                 String pwd = password.getText().toString();
                 if(name.equals("")){
-                    Toast.makeText(getApplicationContext(),"用户名为空！",Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this,"用户名为空！",Toast.LENGTH_SHORT).show();
                 }else if(pwd.equals("")){
-                    Toast.makeText(getApplicationContext(),"密码为空！",Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this,"密码为空！",Toast.LENGTH_SHORT).show();
                 }else if(!name.equals("") && !pwd.equals("")) {
-                    if (login_name.equals("chenxp38")) {
-                        Intent intent = new Intent(MainActivity.this, DataViewActivity.class);
-                        startActivity(intent);
-                        MainActivity.this.finish();
+                    if (name.equals("chenxp38")) {
+                        if(pwd.equals("chenxp38")) {
+                            Intent intent = new Intent(MainActivity.this, DataViewActivity.class);
+                            startActivity(intent);
+                            MainActivity.this.finish();
+                        }else{
+                            Toast.makeText(MainActivity.this,"密码错误！",Toast.LENGTH_SHORT).show();
+                        }
                     }else{
-                        Toast.makeText(MainActivity.this, "Sorry,您不是管理员！"+login_name, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Sorry,您不是管理员！"+ name, Toast.LENGTH_SHORT).show();
                     }
                 }
             }
