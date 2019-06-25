@@ -26,7 +26,6 @@ public class HomeActivity extends AppCompatActivity {
     private static final String TABLE_NAME = "Info";//数据库表的名字
     public List<Map<String, String>> datas = new ArrayList<Map<String, String>>();
     ImageView head_image;
-    String username;
     String password;
     String head_image_url;
     Button gotoApply;
@@ -39,9 +38,10 @@ public class HomeActivity extends AppCompatActivity {
         //在setContentView之前添加,未添加的话home键监听无效，设置窗体属性
         this.getWindow().setFlags(0x80000000, 0x80000000);
         setContentView(R.layout.activity_home);
-
+        Intent CurrentIntent = getIntent();//获取MainActivity.java传过来的值
         findbyid();
-
+        String username = CurrentIntent.getStringExtra("username");
+        Toast.makeText(getApplicationContext(),"用户名为:"+username,Toast.LENGTH_SHORT).show();
         head_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -21,6 +21,9 @@ public class Meeting_add_Activity extends AppCompatActivity {
         gotoApply.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String title_s = title.getText().toString();
+                String participants_s = participants.getText().toString();
+                String start_time_s = start_time.getText().toString();
+                String ending_time_s = ending_time.getText().toString();
                 Toast.makeText(Meeting_add_Activity.this, title_s, Toast.LENGTH_LONG).show();
             }
         });

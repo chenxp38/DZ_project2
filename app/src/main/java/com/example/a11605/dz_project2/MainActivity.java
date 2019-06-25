@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     EditText password;
     private static final String TABLE_NAME = "Info";
     private static final String DB_NAME = "MyDB.db";
+    private static final int REQUEST_CODE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                         String receive_pwd = cursor.getString(cursor.getColumnIndex("password")).toString();//获取该用户名对应的用户密码
                         if (receive_pwd.equals(pwd)){//密码正确
                             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                            intent.putExtra("username",name);//把用户名传到主页面
                             startActivity(intent);
                             MainActivity.this.finish();
                         }else{
@@ -73,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
         gotoDataView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,4 +109,13 @@ public class MainActivity extends AppCompatActivity {
         login_name = findViewById(R.id.name_input);
         password = findViewById(R.id.pwd_input);
     }
+    protected void onActivityResult(int requestCode,int resultCode,Intent data){
+        //
+        if(requestCode==REQUEST_CODE){
+            if(requestCode==RESULT_OK){
+                String name = data.getStringExtra("name");
+                System.out.println("onActivityResult().name="+name);
+            }
+        }
+    };
 }
