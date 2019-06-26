@@ -70,16 +70,20 @@ public class LoginActivity extends AppCompatActivity {
                         // 当姓名编辑框与数据库中已存在的数据相同时，输出相应的Toast信息
                         Toast.makeText(LoginActivity.this, "用户名已存在", Toast.LENGTH_SHORT).show();
                     } else {
-                        ContentValues contentValues = new ContentValues();
-                        contentValues.put("username", username);//存
-                        contentValues.put("password", password);
-                        contentValues.put("image_heaad_url", image_head_url);
-                        sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
-                        sqLiteDatabase.close();
-                        Toast.makeText(LoginActivity.this, "注册成功！", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
+                        if (image_head_url == null){
+                            Toast.makeText(LoginActivity.this, "请选择头像！", Toast.LENGTH_SHORT).show();
+                        }else {
+                            ContentValues contentValues = new ContentValues();
+                            contentValues.put("username", username);//存
+                            contentValues.put("password", password);
+                            contentValues.put("image_heaad_url", image_head_url);
+                            sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
+                            sqLiteDatabase.close();
+                            Toast.makeText(LoginActivity.this, "注册成功！", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
                     }
                 }
             }
@@ -148,6 +152,7 @@ public class LoginActivity extends AppCompatActivity {
             Uri uri1 = data.getData();
             image_head_url = uri1.getPath();//这是本机的图片路径
             image_head_url = uri1.toString();
+            Toast.makeText(getApplicationContext(),"图片url为:"+ image_head_url,Toast.LENGTH_SHORT).show();
             Uri uri2 = Uri.parse((String) image_head_url);//其实只是测试Uri和string的相互转换，没什么其他的意思，就是说下面Bitmap直接用uri1就行了
              System.out.println(image_head_url);
             //Toast.makeText(LoginActivity.this, img_url, Toast.LENGTH_SHORT).show();

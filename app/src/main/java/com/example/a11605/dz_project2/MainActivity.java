@@ -60,9 +60,11 @@ public class MainActivity extends AppCompatActivity {
                         cursor1.moveToFirst();//这句有问题
                         //String receive_name = cursor.getString(cursor.getColumnIndex("username")).toString();
                         String receive_pwd = cursor.getString(cursor.getColumnIndex("password")).toString();//获取该用户名对应的用户密码
+                        String receive_img_url = cursor.getString(cursor.getColumnIndex("image_heaad_url")).toString();//获取该用户名对应的用户密码
                         if (receive_pwd.equals(pwd)){//密码正确
                             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                             intent.putExtra("username",name);//把用户名传到主页面
+                            intent.putExtra("head_img_url", receive_img_url);
                             startActivity(intent);
                             MainActivity.this.finish();
                         }else{

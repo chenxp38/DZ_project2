@@ -14,8 +14,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,11 +28,14 @@ public class HomeActivity extends AppCompatActivity {
     private static final String TABLE_NAME = "Info";//数据库表的名字
     public List<Map<String, String>> datas = new ArrayList<Map<String, String>>();
     ImageView head_image;
+    String username;
     String password;
     String head_image_url;
     Button gotoApply;
+    TextView name_TV;
     void findbyid(){
         head_image = findViewById(R.id.personal_image);
+        name_TV = findViewById(R.id.usernameShow);
         gotoApply = findViewById(R.id.gotoApply);
     }
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +45,29 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         Intent CurrentIntent = getIntent();//获取MainActivity.java传过来的值
         findbyid();
-        String username = CurrentIntent.getStringExtra("username");
-        Toast.makeText(getApplicationContext(),"用户名为:"+username,Toast.LENGTH_SHORT).show();
+        username = CurrentIntent.getStringExtra("username");
+        head_image_url = CurrentIntent.getStringExtra("head_img_url");
+        Uri uri = Uri.parse((String) head_image_url);//转为uri
+        //ContentResolver cr = this.getContentResolver();
+        try {
+            FileInputStream fis = new FileInputStream(head_image_url);
+            Bitmap bitmap = BitmapFactory.decodeStream(fis);
+            head_image.setImageBitmap(bitmap);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+       /* Uri uri = Uri.parse(head_image_url);
+        ContentResolver cr = this.getContentResolver();
+        try {
+            Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+            /* 将Bitmap设定到ImageView */
+        /*    head_image.setImageBitmap(bitmap);
+        } catch (FileNotFoundException e) {
+            Log.e("Exception", e.getMessage(),e);
+        }*/
+        name_TV.setText(username);
+        Toast.makeText(getApplicationContext(),"用户名为:"+ head_image_url,Toast.LENGTH_SHORT).show();
+
         head_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +78,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this,Meeting_add_Activity.class);
+                intent.putExtra("username1",username);//把用户名传到主页面
                 startActivity(intent);
                 HomeActivity.this.finish();
             }
