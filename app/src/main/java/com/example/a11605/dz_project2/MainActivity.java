@@ -56,11 +56,11 @@ public class MainActivity extends AppCompatActivity {
                                 "username NVARCHAR, " +
                                 "password NVARCHAR, " +
                                 "image_heaad_url NVARCHAR)");
-                        Cursor cursor1 = db1.query(TABLE_NAME, new String[]{"username, password, image_heaad_url"}, "username=?", new String[]{"123"}, null, null, null);
-                        cursor1.moveToFirst();//这句有问题
+                        Cursor cursor1 = db1.query(TABLE_NAME, new String[]{"username, password, image_heaad_url"}, "username=?", new String[]{name}, null, null, null);
+                        cursor1.moveToFirst();                  //上条语句应该查询的是数据库中用户名所在的行，并提取密码等数据
                         //String receive_name = cursor.getString(cursor.getColumnIndex("username")).toString();
-                        String receive_pwd = cursor.getString(cursor.getColumnIndex("password")).toString();//获取该用户名对应的用户密码
-                        String receive_img_url = cursor.getString(cursor.getColumnIndex("image_heaad_url")).toString();//获取该用户名对应的用户密码
+                        String receive_pwd = cursor1.getString(cursor1.getColumnIndex("password")).toString();//获取该用户名对应的用户密码
+                        String receive_img_url = cursor1.getString(cursor1.getColumnIndex("image_heaad_url")).toString();//获取该用户名对应的用户密码
                         if (receive_pwd.equals(pwd)){//密码正确
                             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                             intent.putExtra("username",name);//把用户名传到主页面

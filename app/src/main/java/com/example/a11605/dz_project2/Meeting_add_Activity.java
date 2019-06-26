@@ -1,6 +1,9 @@
 package com.example.a11605.dz_project2;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -23,7 +26,6 @@ public class Meeting_add_Activity extends AppCompatActivity {
         Intent CurrentIntent = getIntent();//获取MainActivity.java传过来的值
         findbyid();
         username1 = CurrentIntent.getStringExtra("username1");
-        Toast.makeText(getApplicationContext(),"用户名为:"+ username1,Toast.LENGTH_SHORT).show();
         name_show.setText(username1);
         gotoApply.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -31,7 +33,6 @@ public class Meeting_add_Activity extends AppCompatActivity {
                 String participants_s = participants.getText().toString();
                 String start_time_s = start_time.getText().toString();
                 String ending_time_s = ending_time.getText().toString();
-                Toast.makeText(Meeting_add_Activity.this, title_s, Toast.LENGTH_LONG).show();
 
                 //将会议信息存入会议数据库
                 if (title_s.equals("")) {
@@ -42,8 +43,30 @@ public class Meeting_add_Activity extends AppCompatActivity {
                     Toast.makeText(Meeting_add_Activity.this, "未填写会议开始时间!", Toast.LENGTH_SHORT).show();
                 } else if (ending_time_s.equals("")) {
                     Toast.makeText(Meeting_add_Activity.this, "未填写会议结束时间!", Toast.LENGTH_SHORT).show();
-                } else {
+                } else {//先判断会议室有没有空，有空才能添加到会议室和个人会议的数据库
+                    Meeting_Room_DB_Activity db = new Meeting_Room_DB_Activity(getBaseContext());
+                    SQLiteDatabase sqLiteDatabase = db.getWritableDatabase();
+                    Cursor cursor = sqLiteDatabase.rawQuery("select * from " +
+                            "MeetingRoom" + " where title like ?", new String[]{title_s});//查询会议室的议题名
+                    if (cursor.moveToFirst() == true) {
+                        // 当议题与数据库中已存在的数据相同时，输出相应的Toast信息
+                        Toast.makeText(Meeting_add_Activity.this, "请使用其他议题名称！", Toast.LENGTH_SHORT).show();
+                    } else {
+                        ContentValues contentValues = new ContentValues();
+                        contentValues.put("title", title_s);//存
+                        contentValues.put("username", username1);
+                        contentValues.put("participant", participants_s);
+                        contentValues.put("start_time", start_time_s);
+                        contentValues.put("ending_time", ending_time_s);
+                        sqLiteDatabase.insert("MeetingRoom", null, contentValues);
+                        sqLiteDatabase.close();
+                        Toast.makeText(Meeting_add_Activity.this, "会议申请成功！", Toast.LENGTH_SHORT).show();
 
+                        //跳转到Meeting_Room_Activity.java测试一下
+                        Intent intent = new Intent(Meeting_add_Activity.this, Meeting_Room_Activity.class);
+                        intent.putExtra("meeting_title",title_s);//把用户名传到主页面
+                        startActivity(intent);
+                    }
                 }
             }
         });

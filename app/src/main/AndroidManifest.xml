@@ -25,6 +25,7 @@
         <activity android:name=".AddActivity"></activity>
         <activity android:name=".HomeActivity"></activity>
         <activity android:name=".Meeting_add_Activity"></activity>
+        <activity android:name=".Meeting_Room_Activity"></activity>
     </application>
 
 </manifest>
