@@ -108,7 +108,7 @@ public class Meeting_Room_Activity extends AppCompatActivity {
             }
         });
         // listview的长按事件，弹出对话框，是否删除联系人
-        LV.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+     /*   LV.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder message = new AlertDialog.Builder(Meeting_Room_Activity.this);
@@ -121,7 +121,7 @@ public class Meeting_Room_Activity extends AppCompatActivity {
                             MyDataBase db = new MyDataBase(getBaseContext());
                             SQLiteDatabase sqLiteDatabase = db.getWritableDatabase();
                             sqLiteDatabase.execSQL("delete from " + TABLE_NAME
-                                    + " where title = ?", new String[]{datas.get(position).get("title_m")});
+                                    + " where title = ?", new String[]{"First Meeting"});
                             sqLiteDatabase.close();
                             // 删除listview中的对应数据
                             datas.remove(position);
@@ -138,7 +138,35 @@ public class Meeting_Room_Activity extends AppCompatActivity {
                 message.create().show();
                 return true;
             }
+        });*/
+        LV.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                AlertDialog.Builder message = new AlertDialog.Builder(Meeting_Room_Activity.this);
+                message.setTitle("删除联系人");
+                message.setMessage("确定删除联系人");
+                message.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // 在数据库中进行delete数据
+                        Meeting_Room_DB_Activity db = new Meeting_Room_DB_Activity(getBaseContext());
+                        SQLiteDatabase sqLiteDatabase = db.getWritableDatabase();
+                        sqLiteDatabase.execSQL("delete from " + "MeetingRoom"
+                                + " where title = ?", new String[]{"S Meeting"});
+                        sqLiteDatabase.close();
+                        // 删除listview中的对应数据
+                        datas.remove(position);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+                message.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                });
+                message.create().show();
+                return true;
+            }
         });
+
     }
 
 
