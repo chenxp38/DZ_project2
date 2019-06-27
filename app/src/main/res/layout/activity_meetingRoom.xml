@@ -1,14 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Meeting_Room_Activity">
-    <Button
-        android:id="@+id/testBt"
-        android:text="test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    android:layout_gravity="center"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/activity_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/re_last"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/goto_return"
+            android:textSize="16dp"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite" />
+
+        <TextView
+            android:id="@+id/display_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="今日会议"
+            android:textSize="20sp"
+            android:layout_toRightOf="@id/re_last"
+            android:layout_marginLeft="80dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/MeetingingRoom_number"
+            android:layout_weight="1"
+            android:text="会议室"
+            android:textColor="@color/colorBlack"
+            android:textSize="18dp"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/titleText"
+            android:layout_weight="2"
+            android:text="议题"
+            android:textColor="@color/colorBlack"
+            android:textSize="18dp"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/nameText"
+            android:layout_weight="2"
+            android:text="申请者"
+            android:textColor="@color/colorBlack"
+            android:textSize="18dp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/meeting_display"
+        android:layout_weight="50">
+
+    </ListView>
+
+</LinearLayout>
+

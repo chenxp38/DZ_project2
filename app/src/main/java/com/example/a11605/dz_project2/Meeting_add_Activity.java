@@ -20,6 +20,7 @@ public class Meeting_add_Activity extends AppCompatActivity {
     EditText start_time;
     EditText ending_time;
     Button gotoApply;
+    Button gotoMeetingRoom;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_meeting);
@@ -27,6 +28,13 @@ public class Meeting_add_Activity extends AppCompatActivity {
         findbyid();
         username1 = CurrentIntent.getStringExtra("username1");
         name_show.setText(username1);
+        gotoMeetingRoom.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(Meeting_add_Activity.this, Meeting_Room_Activity.class);
+                intent.putExtra("username1",username1);//把用户名传到下一页面
+                startActivity(intent);
+            }
+        });
         gotoApply.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String title_s = title.getText().toString();
@@ -62,7 +70,7 @@ public class Meeting_add_Activity extends AppCompatActivity {
                         sqLiteDatabase.close();
                         Toast.makeText(Meeting_add_Activity.this, "会议申请成功！", Toast.LENGTH_SHORT).show();
 
-                        //跳转到Meeting_Room_Activity.java测试一下
+                        //跳转到Meeting_Room_Activity.java测试一下,就是查看会议室的时段有没有空闲的
                         Intent intent = new Intent(Meeting_add_Activity.this, Meeting_Room_Activity.class);
                         intent.putExtra("meeting_title",title_s);//把用户名传到主页面
                         startActivity(intent);
@@ -78,5 +86,6 @@ public class Meeting_add_Activity extends AppCompatActivity {
         ending_time = findViewById(R.id.ending_time_input);
         gotoApply = findViewById(R.id.add_meeting_apply);
         name_show = findViewById(R.id.name_show);
+        gotoMeetingRoom = findViewById(R.id.goto_meetingRoom);
     }
 }

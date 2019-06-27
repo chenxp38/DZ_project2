@@ -156,8 +156,8 @@
         />
 
     <Button
-        android:id="@+id/clear"
-        android:text="清空"
+        android:id="@+id/goto_meetingRoom"
+        android:text="会议室"
         android:textSize="24sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

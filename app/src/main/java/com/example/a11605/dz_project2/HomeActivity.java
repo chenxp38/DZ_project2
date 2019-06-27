@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,11 +34,18 @@ public class HomeActivity extends AppCompatActivity {
     String password;
     String head_image_url;
     Button gotoApply;
+    Button re_login;
     TextView name_TV;
+    RadioGroup choose_func_Btn;
+    RadioButton had_applied_btn, need_to_join_btn;
     void findbyid(){
         head_image = findViewById(R.id.personal_image);
         name_TV = findViewById(R.id.usernameShow);
         gotoApply = findViewById(R.id.gotoApply);
+        re_login = findViewById(R.id.re_login);
+        choose_func_Btn = findViewById(R.id.choose_function_btn);
+        had_applied_btn = findViewById(R.id.had_applied_btn);
+        need_to_join_btn = findViewById(R.id.need_to_join_btn);
     }
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,15 +83,34 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+        re_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
         gotoApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this,Meeting_add_Activity.class);
                 intent.putExtra("username1",username);//把用户名传到主页面
                 startActivity(intent);
-                HomeActivity.this.finish();
             }
         });
-
+        //下面是对两个单选按钮的显示的处理
+        choose_func_Btn.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId){
+                    case R.id.had_applied_btn:
+                        Toast.makeText(HomeActivity.this, "已申请会议", 1).show();
+                        break;
+                    case R.id.need_to_join_btn:
+                        Toast.makeText(HomeActivity.this, "要参加会议", 1).show();
+                        break;
+                }
+            }
+        });
     }
 }
