@@ -128,9 +128,7 @@ public class Meeting_Room_Activity extends AppCompatActivity {
                             adapter.notifyDataSetChanged();
                             //这里有一个问题就是删除一项后就会返回，现在没空弄，过后看见弄一下
                         }
-                        else{
-                            Toast.makeText(Meeting_Room_Activity.this, "你不是管理员，无权限删除!", Toast.LENGTH_SHORT).show();
-                        }
+
                     }
                 });
                 message.setNegativeButton("取消", new DialogInterface.OnClickListener() {

@@ -69,9 +69,10 @@
 
         <RadioButton
             android:id="@+id/had_applied_btn"
-            android:text="已申请会议"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="已申请会议" />
 
         <RadioButton
             android:id="@+id/need_to_join_btn"
@@ -87,5 +88,13 @@
         app:layout_constraintTop_toBottomOf="@id/choose_function_btn"
         android:layout_marginTop="2dp"
         />
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/line2"
+        android:id="@+id/had_applied_meeting_display"
+        >
+
+    </ListView>
 
 </android.support.constraint.ConstraintLayout>
