@@ -21,6 +21,7 @@ public class Meeting_add_Activity extends AppCompatActivity {
     EditText ending_time;
     Button gotoApply;
     Button gotoMeetingRoom;
+    Button return_home;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_meeting);
@@ -33,6 +34,14 @@ public class Meeting_add_Activity extends AppCompatActivity {
                 Intent intent = new Intent(Meeting_add_Activity.this, Meeting_Room_Activity.class);
                 intent.putExtra("username1",username1);//把用户名传到下一页面
                 startActivity(intent);
+            }
+        });
+        return_home.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(Meeting_add_Activity.this, HomeActivity.class);
+                intent.putExtra("username1",username1);//把用户名传到下一页面
+                startActivity(intent);
+                Meeting_add_Activity.this.finish();
             }
         });
         gotoApply.setOnClickListener(new View.OnClickListener() {
@@ -87,5 +96,6 @@ public class Meeting_add_Activity extends AppCompatActivity {
         gotoApply = findViewById(R.id.add_meeting_apply);
         name_show = findViewById(R.id.name_show);
         gotoMeetingRoom = findViewById(R.id.goto_meetingRoom);
+        return_home = findViewById(R.id.return_home);
     }
 }

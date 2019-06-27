@@ -39,6 +39,16 @@
         app:layout_constraintLeft_toRightOf="@+id/username"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/return_home"
+        android:background="@drawable/goto_return"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
     <include layout="@layout/line"
         android:id="@+id/line2"
         android:layout_width="match_parent"

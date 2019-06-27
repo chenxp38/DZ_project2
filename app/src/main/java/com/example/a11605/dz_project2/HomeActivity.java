@@ -31,9 +31,8 @@ import java.util.List;
 import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity {
-    private static final String TABLE_NAME = "Info";//数据库表的名字
-    public List<Map<String, String>> datas = new ArrayList<Map<String, String>>();
-    public SimpleAdapter adapter;
+    private static final String TABLE_NAME = "MeetingRoom";//数据库表的名字
+
     public ListView LV;
     ImageView head_image;
     String username;
@@ -44,9 +43,9 @@ public class HomeActivity extends AppCompatActivity {
     TextView name_TV;
     RadioGroup choose_func_Btn;
     RadioButton had_applied_btn, need_to_join_btn;
-    Map<String, String> map = new HashMap<String, String>();
     String receive_start_time;
     String receive_ending_time;
+    String receive_name;
 
     void findbyid(){
         head_image = findViewById(R.id.personal_image);
@@ -122,7 +121,7 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     }
                     case R.id.need_to_join_btn: {
-                        Toast.makeText(HomeActivity.this,"要参加会议！",Toast.LENGTH_SHORT).show();
+                        need_to_join_display();
                         break;
                     }
                 }
@@ -130,6 +129,9 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
     void had_applied_display(){
+        List<Map<String, String>> datas = new ArrayList<Map<String, String>>();
+        SimpleAdapter adapter;
+        Map<String, String> map = new HashMap<String, String>();
         //忽然发现会有一个重复点击的问题，所以要做一个限制，就是已经存在了不能添加显示
         //在MeetRoom_DB的数据库里面关于第二列的username查询，输出显示
             Meeting_Room_DB_Activity db = new Meeting_Room_DB_Activity(getBaseContext());
@@ -154,6 +156,7 @@ public class HomeActivity extends AppCompatActivity {
                     //
                     if (cursor1.moveToFirst() == true) {//注意这里不能用上一行的cursor1.moveToFirst();命令（其他类应该能看到），因为用了只会得到第一个符合条件的数据                                    String receive_title = cursor.getString(cursor.getColumnIndex("title")).toString();//获取该用户名对应的议题
                         String receive_title = cursor.getString(cursor.getColumnIndex("title")).toString();
+                        receive_name = cursor.getString(cursor.getColumnIndex("username")).toString();
                         receive_start_time = cursor.getString(cursor.getColumnIndex("start_time")).toString();//获取会议开始时间
                         receive_ending_time = cursor.getString(cursor.getColumnIndex("ending_time")).toString();//获取会议结束时间
                         //尝试显示
@@ -170,7 +173,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (is_add == true) {
                             map.put("meeting_room", "1");
                             map.put("title", receive_title);
-                            map.put("name", username);
+                            map.put("name", receive_name);
                             map.put("start_time", receive_start_time);
                             map.put("end_time", receive_ending_time);
                             datas.add(map);
@@ -200,4 +203,81 @@ public class HomeActivity extends AppCompatActivity {
                 });
             }
     }
+
+    void need_to_join_display(){
+        List<Map<String, String>> datas2 = new ArrayList<Map<String, String>>();
+        SimpleAdapter adapter2;
+        Map<String, String> map2 = new HashMap<String, String>();
+        //忽然发现会有一个重复点击的问题，所以要做一个限制，就是已经存在了不能添加显示
+        //在MeetRoom_DB的数据库里面关于第二列的username查询，输出显示
+        Meeting_Room_DB_Activity db2 = new Meeting_Room_DB_Activity(getBaseContext());
+        SQLiteDatabase sqLiteDatabase2 = db2.getWritableDatabase();
+        Cursor cursor2 = sqLiteDatabase2.rawQuery("select * from " +
+                "MeetingRoom" + " where participant like ?", new String[]{username});
+        if (cursor2 == null) {
+        }
+        else {
+            while (cursor2.moveToNext()) {
+                //
+                SQLiteDatabase db3 = openOrCreateDatabase("MeetingRoom.db", MODE_PRIVATE, null);
+                db3.execSQL("CREATE TABLE IF NOT EXISTS password (_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "title NVARCHAR, " +
+                        "username NVARCHAR, " +
+                        "participant NVARCHAR, " +
+                        "start_time NVARCHAR, " +
+                        "ending_time NVARCHAR)");
+                Cursor cursor3 = db3.query("MeetingRoom", new String[]{"title, username, participant, start_time, ending_time"},
+                        "participant=?", new String[]{username}, null, null, null);
+                //  cursor1.moveToFirst();                  //上条语句应该查询的是数据库中用户名所在的行，并提取密码等数据
+                //
+                if (cursor3.moveToFirst() == true) {//注意这里不能用上一行的cursor1.moveToFirst();命令（其他类应该能看到），因为用了只会得到第一个符合条件的数据                                    String receive_title = cursor.getString(cursor.getColumnIndex("title")).toString();//获取该用户名对应的议题
+                    String receive_title = cursor2.getString(cursor2.getColumnIndex("title")).toString();
+                    receive_start_time = cursor2.getString(cursor2.getColumnIndex("start_time")).toString();//获取会议开始时间
+                    receive_ending_time = cursor2.getString(cursor2.getColumnIndex("ending_time")).toString();//获取会议结束时间
+                    //尝试显示
+                    //在这里判断有没有重复点击
+                    // 遍历Map
+                    boolean is_add2 = true;
+                    for (Map.Entry<String, String> entry : map2.entrySet()) {
+                        String key = entry.getKey();
+                        String value = entry.getValue();
+                        if (key.equals("title") && value.equals(receive_title)) {
+                            is_add2 = false;//意思就是Map中的title（唯一）已经存在时，不添加该条
+                        }
+                    }
+                    if (is_add2 == true) {
+                        map2.put("meeting_room", "1");
+                        map2.put("title", receive_title);
+                        map2.put("name", username);
+                        map2.put("start_time", receive_start_time);
+                        map2.put("end_time", receive_ending_time);
+                        datas2.add(map2);
+                    }
+                }
+            }
+            adapter2 = new SimpleAdapter(HomeActivity.this, datas2, R.layout.meeting_item,
+                    new String[]{"meeting_room", "title", "name"},
+                    new int[]{R.id.meeting_room, R.id.title_TV, R.id.username_TV});//item
+            LV.setAdapter(adapter2);
+            LV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    AlertDialog alertDialog2 = new AlertDialog.Builder(HomeActivity.this)
+                            .setTitle("会议时间")
+                            .setMessage("开始时间：" + receive_start_time + "\n结束时间：" + receive_ending_time)
+                            .setIcon(R.drawable.time)
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {//添加"Yes"按钮
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                }
+                            }).create();
+                    alertDialog2.show();
+                }
+            });
+        }
+    }
+
+
 }
