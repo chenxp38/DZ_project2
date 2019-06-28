@@ -34,6 +34,7 @@ public class Meeting_add_Activity extends AppCompatActivity {
                 Intent intent = new Intent(Meeting_add_Activity.this, Meeting_Room_Activity.class);
                 intent.putExtra("username1",username1);//把用户名传到下一页面
                 startActivity(intent);
+                Meeting_add_Activity.this.finish();
             }
         });
         return_home.setOnClickListener(new View.OnClickListener() {

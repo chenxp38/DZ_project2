@@ -232,6 +232,7 @@ public class HomeActivity extends AppCompatActivity {
                 //
                 if (cursor3.moveToFirst() == true) {//注意这里不能用上一行的cursor1.moveToFirst();命令（其他类应该能看到），因为用了只会得到第一个符合条件的数据                                    String receive_title = cursor.getString(cursor.getColumnIndex("title")).toString();//获取该用户名对应的议题
                     String receive_title = cursor2.getString(cursor2.getColumnIndex("title")).toString();
+                    receive_name = cursor2.getString(cursor2.getColumnIndex("username")).toString();
                     receive_start_time = cursor2.getString(cursor2.getColumnIndex("start_time")).toString();//获取会议开始时间
                     receive_ending_time = cursor2.getString(cursor2.getColumnIndex("ending_time")).toString();//获取会议结束时间
                     //尝试显示
@@ -248,7 +249,7 @@ public class HomeActivity extends AppCompatActivity {
                     if (is_add2 == true) {
                         map2.put("meeting_room", "1");
                         map2.put("title", receive_title);
-                        map2.put("name", username);
+                        map2.put("name", receive_name);
                         map2.put("start_time", receive_start_time);
                         map2.put("end_time", receive_ending_time);
                         datas2.add(map2);
